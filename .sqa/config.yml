@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs:
+      branch: main
+      repo: https://gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-chocolate-dolphin.sh
+        container: qc.acc_beady-orange-serval
+  QC.Doc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-orange-llama.sh
+        container: qc.doc_shaky-amethyst-echidna
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pasty-smalt-chihuahua.sh
+        container: qc.doc_ready-bistre-discus
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-champagne-chihuahua.sh
+        container: qc.doc_slaphappy-white-dormouse
+  QC.Lic:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-lemon-forest.sh
+        container: qc.lic_sloppy-turquoise-whippet
+  QC.Sec:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-rust-slug.sh
+        container: qc.sec_skanky-grey-bee
+  QC.Sty:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-bistre-uguisu.sh
+        container: qc.sty_geeky-saffron-fossa
+  QC.Uni:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-carmine-magpie.sh
+        container: qc.uni_sleepy-sapphire-wolfhound
+  QC.Ver:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/esp-sacs get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-azure-barb.sh
+        container: qc.ver_breezy-vermilion-kakapo
+timeout: 5400
